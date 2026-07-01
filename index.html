@@ -288,6 +288,18 @@ function logToSheet(payload){
 function makeId(d){
   return (d.societe||'')+'_'+(d.nom||'')+'_'+(d.prenom||'')+'_'+(d.date||new Date().toISOString().slice(0,10));
 }
+function logRHValide(){
+  if(!_rh)return;
+  logToSheet({
+    id:makeId(_rh),
+    societe:_rh.societe,nom:_rh.nom,prenom:_rh.prenom,
+    type:(_rh.cp&&_rh.cp.on?'CP':'')+(_rh.abs&&_rh.abs.on?(_rh.cp&&_rh.cp.on?'+':'')+'ABS':''),
+    date_debut:(_rh.cp&&_rh.cp.d)||(_rh.abs&&_rh.abs.d)||'',
+    date_fin:(_rh.cp&&_rh.cp.f)||(_rh.abs&&_rh.abs.f)||'',
+    etape:'termine',statut:'valide',
+    en_attente_nom:'',en_attente_email:'',lien:''
+  });
+}
 function fNow(){var d=new Date();return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' a '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
 function toast(m,ms){var t=ge('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},ms||3500)}
 function spin(m){ge('spmsg').textContent=m||'...';ge('sp').classList.add('show')}
@@ -1029,7 +1041,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(_rh&&_rh.mode==='rh'){
     ge('banner').className='banner bd2';
     ge('badgeTxt').textContent='RH';
-    ge('bannerMsg').innerHTML='Demande signee — <button class="btn bgr" style="padding:6px 14px;font-size:12px" onclick="exportPDF()">Telecharger le PDF</button>';
+    ge('bannerMsg').innerHTML='Demande signee — <button class="btn bgr" style="padding:6px 14px;font-size:12px" onclick="exportPDF();logRHValide()">Telecharger le PDF</button>';
     ge('btnDir').style.display='none';ge('btnRH').style.display='none';ge('btnPDF').style.display='';
       // Bouton ajustement RH
       var adjBtn=document.createElement('button');adjBtn.className='btn bol';adjBtn.textContent='✏️ Ajustement congés payés';adjBtn.style.fontSize='12px';adjBtn.onclick=function(){var ab=ge('rhAdjBox');if(ab)ab.style.display=ab.style.display==='none'?'block':'none';};var _bz=ge('btnZone'),_bp=ge('btnPDF');if(_bz&&_bp)_bz.insertBefore(adjBtn,_bp);else if(_bz)_bz.appendChild(adjBtn);
