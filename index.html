@@ -279,6 +279,15 @@ function subjInfo(d){
   }
   return parts.length?' - '+parts.join(' + '):'';
 }
+/* ─── Suivi n8n ─── */
+var N8N_LOG='https://edgard-opticiens.app.n8n.cloud/webhook/log-demande';
+function logToSheet(payload){
+  fetch(N8N_LOG,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .catch(function(){/* silencieux */});
+}
+function makeId(d){
+  return (d.societe||'')+'_'+(d.nom||'')+'_'+(d.prenom||'')+'_'+(d.date||new Date().toISOString().slice(0,10));
+}
 function fNow(){var d=new Date();return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' a '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
 function toast(m,ms){var t=ge('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},ms||3500)}
 function spin(m){ge('spmsg').textContent=m||'...';ge('sp').classList.add('show')}
@@ -709,6 +718,13 @@ function _ouvrirMailDir(data,dirUrl){
   if(recap)body+='\n\nRecapitulatif :'+recap;
   body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
   window.location.href='mailto:?subject='+encodeURIComponent('['+data.societe+'] A signer - '+data.prenom+' '+data.nom+subjInfo(data))+'&body='+encodeURIComponent(body);
+  // Suivi n8n — étape collab→directeur
+  logToSheet({id:makeId(data),date_creation:new Date().toISOString(),societe:data.societe,nom:data.nom,prenom:data.prenom,
+    type:(data.cp&&data.cp.on?'CP':'')+(data.abs&&data.abs.on?(data.cp&&data.cp.on?'+':'')+'ABS':''),
+    date_debut:(data.cp&&data.cp.d)||(data.abs&&data.abs.d)||'',
+    date_fin:(data.cp&&data.cp.f)||(data.abs&&data.abs.f)||'',
+    etape:'directeur',statut:'en_attente',
+    en_attente_nom:'Directeur',en_attente_email:'',lien:dirUrl});
   toast('Mail ouvert — lien inclus',4000);
 }
 function openMailDir(){_ouvrirMailDir(_md||{},'');}
@@ -878,6 +894,11 @@ async function doSendRH(){
       unspin();
       var body2=body+'\n\nLien pour telecharger le PDF :\n\n'+rhUrl;
       window.location.href='mailto:ressources-humaines@groupe-edgard.com?'+ccPart+'subject='+subj+'&body='+encodeURIComponent(body2);
+      // Suivi n8n — étape dir→RH
+      logToSheet({id:makeId(d),societe:d.societe,nom:d.nom,prenom:d.prenom,
+        type:(d.cp&&d.cp.on?'CP':'')+(d.abs&&d.abs.on?(d.cp&&d.cp.on?'+':'')+'ABS':''),
+        date_debut:(d.cp&&d.cp.d)||(d.abs&&d.abs.d)||'',date_fin:(d.cp&&d.cp.f)||(d.abs&&d.abs.f)||'',
+        etape:'rh',statut:'en_attente',en_attente_nom:'RH',en_attente_email:'ressources-humaines@groupe-edgard.com',lien:rhUrl});
     });
     return;
   }
@@ -920,6 +941,11 @@ async function doSendRH(){
         setTimeout(function(){URL.revokeObjectURL(burl);},3000);
       }
       var bodyPC=body+'\n\nLien pour consulter la demande :\n\n'+rhUrl;
+            // Suivi n8n — étape dir→RH
+      logToSheet({id:makeId(d),societe:d.societe,nom:d.nom,prenom:d.prenom,
+        type:(d.cp&&d.cp.on?'CP':'')+(d.abs&&d.abs.on?(d.cp&&d.cp.on?'+':'')+'ABS':''),
+        date_debut:(d.cp&&d.cp.d)||(d.abs&&d.abs.d)||'',date_fin:(d.cp&&d.cp.f)||(d.abs&&d.abs.f)||'',
+        etape:'rh',statut:'en_attente',en_attente_nom:'RH',en_attente_email:'ressources-humaines@groupe-edgard.com',lien:rhUrl});
       setTimeout(function(){window.location.href='mailto:ressources-humaines@groupe-edgard.com?'+ccPart+'subject='+subj+'&body='+encodeURIComponent(bodyPC);},600);
     });
   });
