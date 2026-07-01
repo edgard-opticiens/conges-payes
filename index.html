@@ -286,7 +286,8 @@ function logToSheet(payload){
     .catch(function(){/* silencieux */});
 }
 function makeId(d){
-  return (d.societe||'')+'_'+(d.nom||'')+'_'+(d.prenom||'')+'_'+(d.date||new Date().toISOString().slice(0,10));
+  var debut=(d.cp&&d.cp.d)||(d.abs&&d.abs.d)||new Date().toISOString().slice(0,10);
+  return (d.societe||'')+'_'+(d.nom||'')+'_'+(d.prenom||'')+'_'+debut;
 }
 function logRHValide(){
   if(!_rh)return;
