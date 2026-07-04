@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-:root{--g:#C9A84C;--gl:#E8C96A;--gp:#F5EDD0;--dk:#1A1A1A;--md:#4A4A4A;--lt:#F9F7F2;--bd:#D8CBA8;--r:6px}
+:root{--g:#00843D;--gl:#34A85A;--gp:#E8F5EE;--dk:#1A1A1A;--md:#4A4A4A;--lt:#F2F8F4;--bd:#B2D8C1;--r:6px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:#EEEBE3;min-height:100vh;padding:16px 10px 40px;color:var(--dk)}
 .banner{max-width:860px;margin:0 auto 10px;padding:9px 16px;border-radius:7px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -23,8 +23,8 @@ body{font-family:'DM Sans',sans-serif;background:#EEEBE3;min-height:100vh;paddin
 .bgr{background:#27AE60;color:#fff}.bgr:hover{background:#219A52}
 .bol{background:transparent;border:2px solid var(--g);color:var(--g)}.bol:hover{background:var(--gp)}
 #wrap{max-width:860px;margin:0 auto;background:#fff;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.12);overflow:hidden}
-.hdr{background:var(--dk);padding:16px 28px;display:flex;align-items:center;gap:16px}
-.logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--g);letter-spacing:3px}
+.hdr{background:#fff;border-bottom:2px solid var(--g);padding:16px 28px;display:flex;align-items:center;gap:16px}
+.logo{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:var(--g);letter-spacing:2px}
 .logos{font-size:9px;letter-spacing:5px;color:#888;text-transform:uppercase;margin-top:2px}
 .hline{flex:1;height:1px;background:linear-gradient(to right,var(--g),transparent);margin:0 14px}
 .htit{text-align:right}.htit h1{font-family:'Playfair Display',serif;font-size:14px;color:#fff;font-weight:600;line-height:1.25}
@@ -144,7 +144,7 @@ body{background:#fff;padding:0;}
 
 <div id="wrap">
   <div class="hdr">
-    <div><div class="logo">EDGARD</div><div class="logos">Opticiens</div></div>
+    <div style="display:flex;align-items:center;gap:10px"><svg width="32" height="32" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><ellipse cx="22" cy="22" rx="20" ry="13" fill="none" stroke="#00843D" stroke-width="2.5"/><circle cx="22" cy="22" r="7" fill="#00843D"/><circle cx="24.5" cy="19.5" r="2.5" fill="rgba(255,255,255,0.6)"/></svg><div><div class="logo" style="font-size:16px;letter-spacing:2px">GÉNÉRALE</div><div class="logos" style="letter-spacing:3px;color:#00843D">D'OPTIQUE</div></div></div>
     <div class="hline"></div>
     <div class="htit"><h1>Demande de Conges<br>&amp; Absences</h1><div class="sdis" id="sdis"></div></div>
   </div>
@@ -153,12 +153,9 @@ body{background:#fff;padding:0;}
       <label class="lbl">Societe</label>
       <select class="sel" id="societe" onchange="updSoc()">
         <option value="">-- Selectionnez votre societe --</option>
-        <option>Edgard Developpement</option><option>Ango</option><option>Biarro</option>
-        <option>Bordo</option><option>Caenpo</option><option>Giro</option>
-        <option>Havro</option><option>Jisam</option><option>Lyono</option>
-        <option>Manso</option><option>Marseillo</option><option>Nanceo</option>
-        <option>Nanto</option><option>Niceo</option><option>Orlo</option>
-        <option>Reimo</option><option>Strabo</option><option>Turo</option>
+        <option>Chato</option><option>Chemillo</option><option>Cholo</option>
+        <option>Dunes</option><option>Ecume</option><option>Formio</option>
+        <option>Marais</option><option>Mudo</option><option>Niorto</option>
       </select>
     </div>
     <!-- Annule et remplace -->
@@ -188,13 +185,13 @@ body{background:#fff;padding:0;}
         </div>
         <div class="jr" id="jrBlk"><div class="jrn" id="jrN">-</div><div class="jrd"><strong>jours ouvres decomptes</strong><br><span id="jrD" style="font-size:10px;color:#999"></span></div></div>
         <div class="rappel">Le congé principal (20 jours ouvrés) doit impérativement être pris dans la période du 1er mai au 31 octobre. &laquo;&nbsp;Si pour des raisons personnelles et avec l'accord de l'entreprise, je prends moins de jours dans la période mentionnée ci-dessus, je renonce à bénéficier des jours de fractionnement&nbsp;&raquo;</div>
-        <div style="margin-top:8px;padding:8px 10px;background:#FFF3CD;border:1.5px solid #E67E22;border-radius:5px">
+        <div style="margin-top:8px;padding:8px 10px;background:#FFF3CD;border:1.5px solid var(--g);border-radius:5px">
           <label style="display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:#856404;cursor:pointer">
-            <input type="checkbox" id="cpSignal" onchange="toggleCpSignal()" style="width:15px;height:15px;accent-color:#E67E22;flex-shrink:0">
+            <input type="checkbox" id="cpSignal" onchange="toggleCpSignal()" style="width:15px;height:15px;accent-color:var(--g);flex-shrink:0">
             ⚠️ Le nombre de jours calculé me semble incorrect
           </label>
           <div id="cpSignalNoteWrap" style="display:none;margin-top:6px">
-            <textarea class="inp" id="cpSignalNote" rows="2" placeholder="Precisez si besoin (ex: jour ferie non pris en compte...)" style="border:1.5px solid #E67E22;border-radius:4px"></textarea>
+            <textarea class="inp" id="cpSignalNote" rows="2" placeholder="Precisez si besoin (ex: jour ferie non pris en compte...)" style="border:1.5px solid var(--g);border-radius:4px"></textarea>
           </div>
         </div>
       </div>
@@ -209,7 +206,6 @@ body{background:#fff;padding:0;}
           <div class="lbl" style="margin-bottom:6px">Motif</div>
           <div class="mrow">
             <div class="mc"><input type="radio" name="motif" id="mEvt" value="evt" onchange="showEvt(true)"><label for="mEvt">🎉 Evenement familial</label></div>
-            <div class="mc"><input type="radio" name="motif" id="mDec" value="dec" onchange="showEvt(false);showDeces(true)"><label for="mDec">🕊️ Décès</label></div>
             <div class="mc"><input type="radio" name="motif" id="mRev" value="rev" onchange="showEvt(false)"><label for="mRev">📚 Conge revision apprenti</label></div>
             <div class="mc"><input type="radio" name="motif" id="mCSS" value="css" onchange="showEvt(false)"><label for="mCSS">💼 CSS</label></div>
             <div class="mc"><input type="radio" name="motif" id="mANR" value="anr" onchange="showEvt(false)"><label for="mANR">📋 ANR</label></div>
@@ -217,7 +213,6 @@ body{background:#fff;padding:0;}
           </div>
         </div>
         <div class="evtd fg" id="evtDet"><label class="lbl">Preciser le motif</label><input class="inp" type="text" id="evtM" placeholder="Ex: mariage, naissance..." autocomplete="off"></div>
-        <div class="evtd fg" id="decDet" style="display:none"><label class="lbl">Lien familial <span style="color:#C0392B">*</span></label><input class="inp" type="text" id="lienFam" placeholder="Ex: père, mère, conjoint..." autocomplete="off"></div>
         <div class="dg">
           <div class="fg"><label class="lbl">Premier jour non travaille</label><div id="absDWrap"><input class="inp" type="date" id="absD" autocomplete="off"></div></div>
           <div class="fg"><label class="lbl">Dernier jour avant reprise</label><div id="absFWrap"><input class="inp" type="date" id="absF" autocomplete="off"></div></div>
@@ -288,11 +283,10 @@ function subjInfo(d){
   }
   return parts.length?' - '+parts.join(' + '):'';
 }
-/* ─── Suivi n8n ─── */
 var N8N_LOG='https://edgard-opticiens.app.n8n.cloud/webhook/log-demande';
 function logToSheet(payload){
   fetch(N8N_LOG,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-    .catch(function(){/* silencieux */});
+    .catch(function(){});
 }
 function makeId(d){
   var debut=(d.cp&&d.cp.d)||(d.abs&&d.abs.d)||new Date().toISOString().slice(0,10);
@@ -318,7 +312,7 @@ function closeM(id){ge(id).classList.remove('show')}
 window.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('show')})
 
 /* Mapping ville */
-var CITY={'Edgard Developpement':'Tours','Turo':'Tours','Bordo':'Tours','Ango':'Angers','Biarro':'Biarritz','Caenpo':'Caen','Giro':'Bordeaux','Havro':'Le Havre','Jisam':'Saint-Germain-en-Laye','Lyono':'Lyon','Manso':'Le Mans','Marseillo':'Marseille','Nanceo':'Nancy','Nanto':'Nantes','Niceo':'Nice','Orlo':'Orleans','Reimo':'Reims','Strabo':'Strasbourg'}
+var CITY={}
 function getCity(s){return CITY[s]||''}
 
 /* Jours feries */
@@ -333,10 +327,11 @@ function countJ(s,f){
   while(ws<=F){
     var r=0,rf=0,r5=0;
     for(var d=0;d<6;d++){var c=new Date(ws);c.setDate(ws.getDate()+d);if(c>=S&&c<=F){var k=c.getFullYear()*10000+(c.getMonth()+1)*100+c.getDate();r++;if(d<5)r5++;if(fy.has(k))rf++;}}
-    // r = jours lun-sam dans la plage, rf = fériés. Formule jours ouvrables 5/6.
-    // max(0, r-rf-1) pour r>=5 (semaine complète ou presque), max(0,r-rf) sinon.
-    var adj=(r>=5?1:0);
-    cp+=Math.max(0,r-rf-adj);fe+=rf;
+    if(r===6){
+      var rfLV=0;
+      for(var d2=0;d2<5;d2++){var c2=new Date(ws);c2.setDate(ws.getDate()+d2);var k2=c2.getFullYear()*10000+(c2.getMonth()+1)*100+c2.getDate();if(fy.has(k2))rfLV++;}
+      cp+=Math.max(0,5-rfLV);fe+=rfLV;
+    }else{var adj=(r>=5?1:0);cp+=Math.max(0,r-rf-adj);fe+=rf;}
     ws.setDate(ws.getDate()+7);
   }
   return{c:cp,fe:fe};
@@ -361,9 +356,7 @@ function togSec(id){
 function openSec(id){ge('sec'+id).classList.add('on');ge('body'+id).classList.add('open');ge('ck'+id).classList.add('on')}
 function closeSec(id){ge('sec'+id).classList.remove('on');ge('body'+id).classList.remove('open');ge('ck'+id).classList.remove('on')}
 function isSec(id){return ge('body'+id).classList.contains('open')}
-function showEvt(v){ge('evtDet').classList.toggle('show',v);if(v){ge('decDet').classList.remove('show');ge('decDet').style.display='none';}}
-function showDeces(v){var dd=ge('decDet');if(dd){dd.style.display=v?'block':'none';dd.classList.toggle('show',v);}}
-function toggleAR(){var cb=ge('chkAR');var box=ge('arDateBox');if(box)box.style.display=(cb&&cb.checked)?'flex':'none';}
+function showEvt(v){ge('evtDet').classList.toggle('show',v)}
 function setRH(id,val){
   var el=ge(id);if(!el)return;
   el.removeAttribute('readonly');el.style.pointerEvents='auto';
@@ -376,7 +369,6 @@ function applyRHAdj(){
   if(cpF)setRH('cpF',fD(cpF));
   if(cpD&&cpF){
     if(cpN){
-      // Override manuel du nombre de jours
       ge('jrN').textContent=cpN;ge('jrD').textContent='(ajusté RH)';ge('jrBlk').style.display='flex';
     } else {
       var r=countJ(cpD,cpF);
@@ -385,7 +377,6 @@ function applyRHAdj(){
   } else if(cpN){
     ge('jrN').textContent=cpN;ge('jrD').textContent='(ajusté RH)';ge('jrBlk').style.display='flex';
   }
-  // Le RH a traité le signalement : on efface la case et le commentaire du collaborateur
   var cs=ge('cpSignal');if(cs)cs.checked=false;
   var csn=ge('cpSignalNote');if(csn)csn.value='';
   var csw=ge('cpSignalNoteWrap');if(csw)csw.style.display='none';
@@ -394,8 +385,6 @@ function applyRHAdj(){
 function applyRHAdjAbs(){
   var motif=gv('rhAbsMotif'),absD=gv('rhAbsD'),absF=gv('rhAbsF'),absH=gv('rhAbsH'),absJ=gv('rhAbsJ');
   if(motif){
-    // Mettre à jour le badge motif affiché
-    var badge=document.querySelector('.sec-body .sec-ttl,#secABS .sec-body [style*="background:var(--g)"]');
     var motifBadges=document.querySelectorAll('#secABS [style*="background:var(--g)"]');
     motifBadges.forEach(function(el){el.textContent=motif;});
     var evtField=ge('evtM');if(evtField){setRH('evtM',motif);}
@@ -554,9 +543,6 @@ function getSigRStrokes(){
 function isEmptyR(){
   var a=ge('sigRArea');return!a||!a._strokes||a._strokes.length===0;
 }
-function getSigRStrokes(){
-  var a=ge('sigRArea');return(a&&a._strokes&&a._strokes.length)?a._strokes:null;
-}
 function isEmpty(id){
   if(id==='cvC'||id==='sigCArea'){var a=ge('sigCArea');return!a||!a._strokes||a._strokes.length===0;}
   var c=ge(id);return!c||!c._strokes||c._strokes.length===0;
@@ -598,7 +584,7 @@ function drawStrokes(canvas,strokes){
 }
 
 /* Collecte */
-var _md=null,_dlN='',_rhN='',_rh=null;
+var _md=null,_dlN='',_rhN='';
 function toggleCpSignal(){
   var w=ge('cpSignalNoteWrap');
   if(w)w.style.display=(ge('cpSignal')&&ge('cpSignal').checked)?'block':'none';
@@ -607,11 +593,12 @@ function collect(){
   var me=document.querySelector('input[name="motif"]:checked');
   return{
     societe:gv('societe'),ville:getCity(gv('societe')),
-    nom:gv('nom'),prenom:gv('prenom'),annuleRemplace:ge('chkAR')&&ge('chkAR').checked?{dateInit:gv('arDate')}:null,
+    nom:gv('nom'),prenom:gv('prenom'),
+    annuleRemplace:getARData(),
     date:ge('today').textContent,tsC:_tsC,
     cp:{on:isSec('CP'),d:gv('cpD'),f:gv('cpF'),n:ge('jrN').textContent,det:ge('jrD').textContent,signal:!!(ge('cpSignal')&&ge('cpSignal').checked),signalNote:gv('cpSignalNote')},
     abs:{on:isSec('ABS'),m:me?me.value:'',mL:me?me.closest('.mc').querySelector('label').textContent.trim():'',
-      evtM:gv('evtM'),lienFam:gv('lienFam'),d:gv('absD'),f:gv('absF'),h:gv('absH'),j:gv('absJ')},
+      evtM:gv('evtM'),d:gv('absD'),f:gv('absF'),h:gv('absH'),j:gv('absJ')},
     sigC:cvJpeg('cvC',0.55),
     sigStrokes:cvStrokes('cvC')
   };
@@ -631,7 +618,7 @@ function buildDir(data){
     cpHtml+="<div class=\"fg\"><label class=\"lbl\">Premier jour</label><div style=\"font-size:13px;font-weight:600;padding:5px 2px;border-bottom:1.5px solid var(--bd)\">"+cD+"</div></div><div class=\"fg\"><label class=\"lbl\">Dernier jour</label><div style=\"font-size:13px;font-weight:600;padding:5px 2px;border-bottom:1.5px solid var(--bd)\">"+cF+"</div></div></div><div class=\"jr\"><div class=\"jrn\">"+cN+"</div><div class=\"jrd\"><strong>jours ouvres</strong>";
     if(cDet)cpHtml+="<br><span style=\"font-size:10px;color:#999\">"+cDet+"</span>";
     cpHtml+="</div></div><div class=\"rappel\">Le congé principal (20 jours ouvrés) doit impérativement être pris dans la période du 1er mai au 31 octobre. &laquo;&nbsp;Si pour des raisons personnelles et avec l\'accord de l\'entreprise, je prends moins de jours dans la période mentionnée ci-dessus, je renonce à bénéficier des jours de fractionnement&nbsp;&raquo;</div>";
-    if(data.cp.signal)cpHtml+="<div style=\"margin-top:8px;padding:7px 10px;background:#FFF3CD;border:1.5px solid #E67E22;border-radius:5px;font-size:11px;color:#856404;font-weight:600\">⚠️ Le collaborateur signale une erreur possible sur le nombre de jours"+(data.cp.signalNote?" : "+esc(data.cp.signalNote):"")+"</div>";
+    if(data.cp.signal)cpHtml+="<div style=\"margin-top:8px;padding:7px 10px;background:#FFF3CD;border:1.5px solid var(--g);border-radius:5px;font-size:11px;color:#856404;font-weight:600\">⚠️ Le collaborateur signale une erreur possible sur le nombre de jours"+(data.cp.signalNote?" : "+esc(data.cp.signalNote):"")+"</div>";
     cpHtml+="</div></div>";
   }
   var absHtml="";
@@ -665,12 +652,12 @@ function buildDir(data){
   H+="<style>"+css+"</style></head><body>";
   H+="<div id=\"sp\"><div class=\"spi\"></div></div><div id=\"toast\"></div><div class=\"tb\"><button class=\"btn bdk\" onclick=\"exportPDF()\">PDF signe</button><button class=\"btn bgr\" onclick=\"sendRH()\">Envoyer aux RH</button>";
   if(agUrl)H+="<a href=\""+agUrl+"\" target=\"_blank\" class=\"btn bdk\" style=\"text-decoration:none\">Agenda Outlook</a>";
-  H+="</div><div class=\"wrap\" id=\"wrap\"><div class=\"hdr\"><div><div class=\"logo\">EDGARD</div><div class=\"logos\">Opticiens</div></div><div class=\"hline\"></div>";
+  H+="</div><div class=\"wrap\" id=\"wrap\"><div class=\"hdr\"><div><div class=\"logo\">GÉNÉRALE</div><div class=\"logos\">D'OPTIQUE</div></div><div class=\"hline\"></div>";
   H+="<div class=\"htit\"><h1>Conges &amp; Absences<\/h1><div class=\"sdis\">"+esc(data.societe)+"<\/div><\/div><\/div><div class=\"fb\">";
   H+="<div class=\"banner bd2\"><span class=\"badge\">Directeur</span>&nbsp; Demande de <strong>"+esc(data.prenom)+" "+esc(data.nom)+"<\/strong> ("+esc(data.societe)+") - Signez puis envoyez aux RH<\/div>";
   H+="<div style=\"margin-bottom:12px;padding-bottom:12px;border-bottom:1.5px solid var(--gp)\"><label class=\"lbl\">Societe<\/label><div style=\"font-size:13px;font-weight:600;padding:5px 2px\">"+esc(data.societe)+"<\/div><\/div>";
   H+="<div class=\"r2\"><div class=\"fg\"><label class=\"lbl\">Nom<\/label><div style=\"font-size:14px;font-weight:700;padding:5px 2px;border-bottom:1.5px solid var(--bd)\">"+esc(data.nom)+"<\/div><\/div><div class=\"fg\"><label class=\"lbl\">Prenom<\/label><div style=\"font-size:14px;font-weight:700;padding:5px 2px;border-bottom:1.5px solid var(--bd)\">"+esc(data.prenom)+"<\/div><\/div><\/div>";
-  if(data.annuleRemplace){arHtml="<div style=\\\"margin-bottom:8px;padding:6px 10px;background:#FEF9EC;border:1.5px solid #C9A84C;border-radius:5px;font-size:11px\\\"><strong>⚠️ Annule et remplace</strong>"+(data.annuleRemplace.dateInit?" la demande du "+data.annuleRemplace.dateInit:"")+"</div>";}H+=arHtml+cpHtml+absHtml;
+  H+=cpHtml+absHtml;
   H+="<div class=\"leg\"><span><strong>Evt Fam</strong> : Evenement familial</span><span><strong>CSS</strong> : Conges sans solde</span><span><strong>ANR</strong> : Absence non remuneree</span><span><strong>RTT</strong> : Forfait jours</span></div>";
   H+="<div class=\"sigs\"><div><div class=\"sigbox\"><div class=\"sighdr\">Signature du collaborateur</div>";
   H+=sigC;
@@ -702,8 +689,6 @@ function doSendDir(){
   if(!gv('nom').trim()||!gv('prenom').trim()){toast('Saisissez votre nom et prenom');return}
   if(!isSec('CP')&&!isSec('ABS')){toast('Cochez au moins un type de demande');return}
   if(isSec('ABS')&&(!gv('absH').trim()||!gv('absJ').trim())){toast('Saisissez les heures et le nombre de jours d\'absence');return}
-  var motifAbs=document.querySelector('input[name="motif"]:checked');
-  if(isSec('ABS')&&motifAbs&&motifAbs.value==='dec'&&!gv('lienFam').trim()){toast('Précisez le lien familial pour le décès');return}
   if(isEmpty('cvC')){toast('Apposez votre signature');return}
   spin('Generation du lien...');
   var sh=ge('shield');if(sh)sh.style.display='none';
@@ -750,51 +735,26 @@ function _ouvrirMailDir(data,dirUrl){
   if(recap)body+='\n\nRecapitulatif :'+recap;
   body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
   window.location.href='mailto:?subject='+encodeURIComponent('['+data.societe+'] A signer - '+data.prenom+' '+data.nom+subjInfo(data))+'&body='+encodeURIComponent(body);
-  // Suivi n8n — étape collab→directeur
   logToSheet({id:makeId(data),date_creation:new Date().toISOString(),societe:data.societe,nom:data.nom,prenom:data.prenom,
     type:(data.cp&&data.cp.on?'CP':'')+(data.abs&&data.abs.on?(data.cp&&data.cp.on?'+':'')+'ABS':''),
     date_debut:(data.cp&&data.cp.d)||(data.abs&&data.abs.d)||'',
     date_fin:(data.cp&&data.cp.f)||(data.abs&&data.abs.f)||'',
-    etape:'directeur',statut:'en_attente',
-    en_attente_nom:'Directeur',en_attente_email:'',lien:dirUrl});
+    etape:'directeur',statut:'en_attente',en_attente_nom:'Directeur',en_attente_email:'',lien:dirUrl});
   toast('Mail ouvert — lien inclus',4000);
 }
 function openMailDir(){_ouvrirMailDir(_md||{},'');}
 
 var _isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-/* Convertit les zones SVG signature en canvas avant html2canvas (fix Edge) */
-function sigsToCanvas(){
-  var areas=[{id:'sigCArea',strokes:_rh?(_rh.sigStrokes||null):(_md?(_md.sigStrokes||null):null)},
-             {id:'sigRArea',strokes:_rh?(_rh.sigRStrokes||null):(getSigRStrokes())}];
-  var saved=[];
-  areas.forEach(function(a){
-    var area=ge(a.id);if(!area)return;
-    // Strokes : depuis la propriété live ou depuis les données sauvegardées
-    var strokes=(area._strokes&&area._strokes.length)?area._strokes:a.strokes;
-    if(!strokes||!strokes.length)return;
-    var c=document.createElement('canvas');c.width=400;c.height=90;
-    var ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,400,90);
-    ctx.strokeStyle='#1A1A1A';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';
-    for(var i=0;i<strokes.length;i++){var s=strokes[i];if(!s||s.length<4)continue;ctx.beginPath();ctx.moveTo(s[0]/99*400,s[1]/99*90);for(var j=2;j<s.length;j+=2)ctx.lineTo(s[j]/99*400,s[j+1]/99*90);ctx.stroke();}
-    c.style.cssText='display:block;width:100%;height:90px;';
-    saved.push({area:area,html:area.innerHTML});
-    area.innerHTML='';area.appendChild(c);
-  });
-  return saved;
-}
-function sigsRestore(saved){
-  saved.forEach(function(s){s.area.innerHTML=s.html;});
-}
 // Remplace temporairement les inputs/textarea par des divs pleine largeur
 // pour eviter que html2canvas ne coupe le texte qui deborde du champ visible.
 function freezeTextFields(){
   var frozen=[];
   var sel='#wrap input[type="text"]:not([style*="display: none"]), #wrap textarea';
   document.querySelectorAll(sel).forEach(function(el){
-    if(el.offsetParent===null)return; // element cache, on ignore
+    if(el.offsetParent===null)return;
     var val=el.value||'';
-    if(!val.trim())return; // rien a figer
+    if(!val.trim())return;
     var cs=window.getComputedStyle(el);
     var div=document.createElement('div');
     div.textContent=val;
@@ -817,9 +777,10 @@ async function genPDF(asBlob){
   var wCP=bCP.classList.contains('open'),wAB=bAB.classList.contains('open');
   bCP.classList.add('open');bAB.classList.add('open');
   var sh=ge('shield');if(sh)sh.style.display='none';
-  // Masquer panneaux ajustement RH (hors #wrap mais cachés par sécurité)
+  // Masquer panneaux ajustement RH
   var adjPanels=[ge('rhAdjBox'),ge('rhAdjBoxAbs')];
   adjPanels.forEach(function(el){if(el)el.style.visibility='hidden'});
+  // Masquer l'overlay iOS s'il est présent
   var iosOverlay=document.getElementById('ios-rh-overlay');
   if(iosOverlay)iosOverlay.style.display='none';
   // Masquer modals et toasts
@@ -828,22 +789,13 @@ async function genPDF(asBlob){
   document.querySelectorAll('input[type="date"]').forEach(function(el){
     if(!el.value)return;saved.push({el:el,v:el.value});el.type='text';el.value=fD(el.value);
   });
-  // Figer les champs texte/textarea qui debordent (evite le texte coupe par html2canvas)
   var frozenFields=freezeTextFields();
-  // S'assurer que jrBlk est visible si jrN a du contenu
-  var jrBlk2=ge('jrBlk');var jrN2=ge('jrN');
-  if(jrBlk2&&jrN2&&jrN2.textContent&&jrN2.textContent!=='-')jrBlk2.style.display='flex';
-  // Nom pour le fichier PDF
-  var pdfNom=_rh?_rh.nom:(_md?_md.nom:gv('nom'));
-  var pdfPrenom=_rh?_rh.prenom:(_md?_md.prenom:gv('prenom'));
-  // Convertir SVG signatures en canvas (fix Edge/Firefox html2canvas)
-  var sigsSaved=sigsToCanvas();
-  var res=null,errMsg=null;
+  var res=null;
   try{
-    var cv=await html2canvas(ge('wrap'),{scale:1.2,useCORS:true,allowTaint:false,logging:false,windowWidth:860});
-    saved.forEach(function(s){s.el.value='';s.el.type='date';s.el.value=s.v});saved=[];
+    // windowWidth:860 = largeur réelle du wrap, scale:1.2 pour tenir sur A4
+    var cv=await html2canvas(ge('wrap'),{scale:1.2,useCORS:true,logging:false,windowWidth:860});
+    saved.forEach(function(s){s.el.value='';s.el.type='date';s.el.value=s.v});
     unfreezeTextFields(frozenFields);
-    sigsRestore(sigsSaved);
     var img=cv.toDataURL('image/jpeg',.88);
     var P=window.jspdf.jsPDF;
     var margin=4,pageW=210,pageH=297,maxW=pageW-2*margin,maxH=pageH-2*margin;
@@ -853,18 +805,14 @@ async function genPDF(asBlob){
     var pdf=new P({orientation:'portrait',unit:'mm',format:'a4'});
     pdf.addImage(img,'JPEG',x,y,imgW,imgH);
     if(asBlob)res=pdf.output('blob');
-    else{pdf.save(('Demande_'+pdfPrenom+'_'+pdfNom+'_SIGNE.pdf').replace(/\s/g,'-'));res=true;}
-  }catch(err){errMsg='Erreur PDF';}
-  // Restaurer dans tous les cas
-  unfreezeTextFields(frozenFields);
-  sigsRestore(sigsSaved);
-  saved.forEach(function(s){s.el.value='';s.el.type='date';s.el.value=s.v});
+    else{pdf.save(('Demande_'+(_md?_md.prenom:gv('prenom'))+'_'+(_md?_md.nom:gv('nom'))+(_md?'_SIGNE':'')+'.pdf').replace(/\s/g,'-'));res=true}
+  }catch(err){saved.forEach(function(s){s.el.value='';s.el.type='date';s.el.value=s.v});unfreezeTextFields(frozenFields);toast('Erreur PDF')}
+  // Restaurer
   document.querySelectorAll('.modal,#toast,#sp').forEach(function(el){el.style.visibility='';});
   adjPanels.forEach(function(el){if(el)el.style.visibility=''});
   if(iosOverlay)iosOverlay.style.display='';
   if(!wCP)bCP.classList.remove('open');if(!wAB)bAB.classList.remove('open');
   if(sh)sh.style.display='none';
-  if(errMsg)toast(errMsg);
   return res;
 }
 
@@ -890,26 +838,7 @@ async function exportPDF(){
 }
 
 /* Emails RH par magasin */
-var RH_MAILS={
-  'Ango':'angers@groupe-edgard.com',
-  'Biarro':'biarritz@groupe-edgard.com',
-  'Bordo':'tours-bordo@groupe-edgard.com',
-  'Caenpo':'caen@groupe-edgard.com',
-  'Giro':'bordeaux@groupe-edgard.com',
-  'Havro':'lehavre@groupe-edgard.com',
-  'Jisam':'saintgermain@groupe-edgard.com',
-  'Lyono':'lyon@groupe-edgard.com',
-  'Manso':'lemans@groupe-edgard.com',
-  'Marseillo':'marseille@groupe-edgard.com',
-  'Nanceo':'nancy@groupe-edgard.com',
-  'Nanto':'nantes@groupe-edgard.com',
-  'Niceo':'nice@groupe-edgard.com',
-  'Orlo':'orleans@groupe-edgard.com',
-  'Reimo':'reims@groupe-edgard.com',
-  'Strabo':'strasbourg@groupe-edgard.com',
-  'Turo':'tours-marceau@groupe-edgard.com'
-};
-function getRhMail(societe){return RH_MAILS[societe]||'ressources-humaines@groupe-edgard.com';}
+function getRhMail(societe){return 'ressources-humaines@groupe-edgard.com';}
 async function doSendRH(){
   var d=_md||{nom:gv('nom'),prenom:gv('prenom'),societe:gv('societe')};
   var dn=gv('dirNom'),dp=gv('dirPrenom');
@@ -955,7 +884,6 @@ async function doSendRH(){
       unspin();
       var body2=body+'\n\nLien pour telecharger le PDF :\n\n'+rhUrl;
       window.location.href='mailto:ressources-humaines@groupe-edgard.com?'+ccPart+'subject='+subj+'&body='+encodeURIComponent(body2);
-      // Suivi n8n — étape dir→RH
       logToSheet({id:makeId(d),societe:d.societe,nom:d.nom,prenom:d.prenom,
         type:(d.cp&&d.cp.on?'CP':'')+(d.abs&&d.abs.on?(d.cp&&d.cp.on?'+':'')+'ABS':''),
         date_debut:(d.cp&&d.cp.d)||(d.abs&&d.abs.d)||'',date_fin:(d.cp&&d.cp.f)||(d.abs&&d.abs.f)||'',
@@ -1002,8 +930,7 @@ async function doSendRH(){
         setTimeout(function(){URL.revokeObjectURL(burl);},3000);
       }
       var bodyPC=body+'\n\nLien pour consulter la demande :\n\n'+rhUrl;
-            // Suivi n8n — étape dir→RH
-      logToSheet({id:makeId(d),societe:d.societe,nom:d.nom,prenom:d.prenom,
+            logToSheet({id:makeId(d),societe:d.societe,nom:d.nom,prenom:d.prenom,
         type:(d.cp&&d.cp.on?'CP':'')+(d.abs&&d.abs.on?(d.cp&&d.cp.on?'+':'')+'ABS':''),
         date_debut:(d.cp&&d.cp.d)||(d.abs&&d.abs.d)||'',date_fin:(d.cp&&d.cp.f)||(d.abs&&d.abs.f)||'',
         etape:'rh',statut:'attente_telechargement',en_attente_nom:'RH',en_attente_email:'ressources-humaines@groupe-edgard.com',lien:rhUrl});
@@ -1063,13 +990,22 @@ function addOutlook(){
   setTimeout(function(){URL.revokeObjectURL(url);},3000);
   toast('Fichier calendrier telecharge — ouvrez-le pour ajouter a votre agenda',5000);
 }
+function toggleAR(){
+  var cb=ge('chkAR');var box=ge('arDateBox');
+  if(box)box.style.display=(cb&&cb.checked)?'block':'none';
+}
+function getARData(){
+  var cb=ge('chkAR');if(!cb||!cb.checked)return null;
+  return{on:true,dateInit:gv('arDate')};
+}
 function resetForm(){
   if(!confirm('Reinitialiser ?'))return;
-  ['nom','prenom','cpD','cpF','absD','absF','absH','absJ','evtM','lienFam','refM','arDate'].forEach(function(id){var el=ge(id);if(el)el.value=''});
+  ['nom','prenom','cpD','cpF','absD','absF','absH','absJ','evtM','refM','arDate'].forEach(function(id){var el=ge(id);if(el)el.value=''});
+  if(ge('chkAR')){ge('chkAR').checked=false;toggleAR();}
   ge('societe').selectedIndex=0;updSoc();
   document.querySelectorAll('input[type="radio"]').forEach(function(r){r.checked=false});
   ge('jrN').textContent='-';ge('jrD').textContent='';
-  closeSec('CP');closeSec('ABS');showEvt(false);showDeces(false);if(ge('chkAR')){ge('chkAR').checked=false;toggleAR();}if(ge('mDec'))ge('mDec').checked=false;
+  closeSec('CP');closeSec('ABS');showEvt(false);
   clrCv('cvC');clrCv('cvR');
   ge('calBox').style.display='none';ge('btnCal').style.display='none';
   toast('Reinitialise');
@@ -1079,7 +1015,7 @@ document.addEventListener('DOMContentLoaded',function(){
   ge('today').textContent=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
   // Lire ?d= (directeur) ou ?r= (RH) dans l'URL
   var search=window.location.search;
-  
+  var _rh=null;
   if(search){
     var m=search.match(/[?&]d=([^&]*)/);
     if(m){var decoded=decodeHash(m[1]);if(decoded&&decoded.nom)_md=decoded;}
@@ -1098,7 +1034,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var sh=ge('shield');if(sh)sh.style.display='none';
     var db=ge('dirBlk');if(db){db.classList.remove('locked');db.style.pointerEvents='none';}
     if(_rh.annuleRemplace){
-      var chkAR=ge('chkAR');if(chkAR){chkAR.checked=true;toggleAR();}
+      var chkARr=ge('chkAR');if(chkARr){chkARr.checked=true;toggleAR();}
       if(_rh.annuleRemplace.dateInit&&ge('arDate')){ge('arDate').value=_rh.annuleRemplace.dateInit;}
     }
     if(_rh.societe){ge('sdis').textContent=_rh.societe;ge('societe').value=_rh.societe;}
@@ -1120,7 +1056,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(_rh.abs&&_rh.abs.on){
       openSec('ABS');
       if(_rh.abs.m){var radio2=ge('m'+_rh.abs.m.charAt(0).toUpperCase()+_rh.abs.m.slice(1));if(radio2)radio2.checked=true;}
-      if(_rh.abs.evtM){ge('evtM').value=_rh.abs.evtM;showEvt(true);}if(_rh.abs.lienFam){ge('lienFam').value=_rh.abs.lienFam;showDeces(true);}
+      if(_rh.abs.evtM){ge('evtM').value=_rh.abs.evtM;showEvt(true);}
       if(_rh.abs.d){var elD2=ge('absD');if(elD2){elD2.type='text';elD2.value=fD(_rh.abs.d);}}
       if(_rh.abs.f){var elF2=ge('absF');if(elF2){elF2.type='text';elF2.value=fD(_rh.abs.f);}}
       if(_rh.abs.h){var elH2=ge('absH');if(elH2){elH2.type='text';elH2.value=_rh.abs.h;}}
@@ -1168,7 +1104,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(_rh.date&&elTod)elTod.textContent=_rh.date;
     if(_rh.tsC&&elTsC2)elTsC2.textContent='Signe le '+_rh.tsC;
     // Rendre tout en lecture seule
-    document.querySelectorAll('#wrap input,#wrap select,#wrap textarea').forEach(function(el){el.setAttribute('readonly','');el.style.pointerEvents='none';});
+    document.querySelectorAll('input,select,textarea').forEach(function(el){el.setAttribute('readonly','');el.style.pointerEvents='none';});
     return;
   }
   if(_md&&_md.nom&&_md.societe){
@@ -1181,7 +1117,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var db=ge('dirBlk');if(db){db.classList.remove('locked');db.style.pointerEvents='auto';}
     // Remplir les données collaborateur
     if(_md.annuleRemplace){
-      var chkAR2=ge('chkAR');if(chkAR2){chkAR2.checked=true;toggleAR();}
+      var chkARd=ge('chkAR');if(chkARd){chkARd.checked=true;toggleAR();}
       if(_md.annuleRemplace.dateInit&&ge('arDate')){ge('arDate').value=_md.annuleRemplace.dateInit;}
     }
     if(_md.societe){ge('sdis').textContent=_md.societe;ge('societe').value=_md.societe;}
@@ -1197,7 +1133,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(_md.abs&&_md.abs.on){
       openSec('ABS');
       if(_md.abs.m){var radio=ge('m'+_md.abs.m.charAt(0).toUpperCase()+_md.abs.m.slice(1));if(radio)radio.checked=true;}
-      if(_md.abs.evtM){ge('evtM').value=_md.abs.evtM;showEvt(true);}if(_md.abs.lienFam){ge('lienFam').value=_md.abs.lienFam;showDeces(true);}
+      if(_md.abs.evtM){ge('evtM').value=_md.abs.evtM;showEvt(true);}
       if(_md.abs.d){var elD=ge('absD');if(elD){elD.type='text';elD.value=fD(_md.abs.d);}}
       if(_md.abs.f){var elF=ge('absF');if(elF){elF.type='text';elF.value=fD(_md.abs.f);}}
       if(_md.abs.h){var elH=ge('absH');if(elH){elH.type='text';elH.value=_md.abs.h;}}
