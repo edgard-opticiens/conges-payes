@@ -1001,6 +1001,8 @@ async function doSendRH(){
   if(!dec){toast('Cochez Autorise ou Refus');return;}
   var sig=(dp&&dn)?dp+' '+dn:'';
   var rhMail=getRhMail(d.societe);
+  var prefillRH=['ressources-humaines@groupe-edgard.com'];
+  if(rhMail&&rhMail!=='ressources-humaines@groupe-edgard.com')prefillRH.push(rhMail);
   var hdr=mailHeader(d);
   var subj='[RH] '+hdr;
   var body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\nBonjour,\n\nVeuillez trouver ci-dessous le lien pour telecharger la demande signee de '+d.prenom+' '+d.nom+' ('+d.societe+').\n\nCordialement,'+(sig?'\n'+sig:'');
@@ -1036,7 +1038,7 @@ async function doSendRH(){
     tryShorten2(longUrl,function(rhUrl){
       unspin();
       var body2=body+'\n\nLien pour telecharger le PDF :\n\n'+rhUrl;
-      openEmailModal('Envoyer aux RH',[rhMail],function(emails){
+      openEmailModal('Envoyer aux RH',prefillRH,function(emails){
         spin('Envoi en cours...');
         sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:body2})
           .then(function(){unspin();toast('Demande envoyee aux RH');})
@@ -1089,7 +1091,7 @@ async function doSendRH(){
         setTimeout(function(){URL.revokeObjectURL(burl);},3000);
       }
       var bodyPC=body+'\n\nLien pour consulter la demande :\n\n'+rhUrl;
-      openEmailModal('Envoyer aux RH',[rhMail],function(emails){
+      openEmailModal('Envoyer aux RH',prefillRH,function(emails){
         spin('Envoi en cours...');
         sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:bodyPC})
           .then(function(){unspin();toast('Demande envoyee aux RH');})
