@@ -821,13 +821,14 @@ function _ouvrirMailDir(data,dirUrl){
   var recap='';
   if(data.cp&&data.cp.on)recap+='\n- CP : du '+fD(data.cp.d)+' au '+fD(data.cp.f)+' ('+data.cp.n+' jours)';
   if(data.abs&&data.abs.on)recap+='\n- Absence : '+fD(data.abs.d)+' au '+fD(data.abs.f);
-  var body='Bonjour,\n\nMerci de signer la demande de '+data.prenom+' '+data.nom+' ('+data.societe+').';
-  if(recap)body+='\n\nRecapitulatif :'+recap;
-  body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
   var hdr=mailHeader(data);
-  body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\n'+body;
   var subj='[A SIGNER] '+hdr;
-  openEmailModal('Envoyer au directeur',[],function(emails){
+  openEmailModal('Envoyer au directeur',getDirMails(data.societe),function(emails){
+    var prenomDest=EMAIL_PRENOMS[emails[0]];
+    var body='Bonjour'+(prenomDest?' '+prenomDest:'')+',\n\nMerci de signer la demande de '+data.prenom+' '+data.nom+' ('+data.societe+').';
+    if(recap)body+='\n\nRecapitulatif :'+recap;
+    body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
+    body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\n'+body;
     spin('Envoi en cours...');
     sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:body})
       .then(function(){unspin();toast('Demande envoyee au directeur');})
@@ -993,6 +994,44 @@ var RH_MAILS={
   'Turo':'tours-marceau@groupe-edgard.com'
 };
 function getRhMail(societe){return RH_MAILS[societe]||'ressources-humaines@groupe-edgard.com';}
+var DIR_MAILS={
+  'Ango':['t.echalier@groupe-edgard.com'],
+  'Biarro':['b.tellechea@groupe-edgard.com'],
+  'Bordo':['v.gogdet@groupe-edgard.com'],
+  'Caenpo':['s.herremans@groupe-edgard.com'],
+  'Giro':['s.langlade@groupe-edgard.com'],
+  'Havro':['e.varin@groupe-edgard.com'],
+  'Jisam':['g.bessenet@groupe-edgard.com'],
+  'Lyono':['a.levrault@groupe-edgard.com'],
+  'Manso':['m.gendre@groupe-edgard.com'],
+  'Marseillo':['j.descamps@groupe-edgard.com'],
+  'Nanceo':['c.boutolleau@groupe-edgard.com'],
+  'Nanto':['j.guillot@groupe-edgard.com'],
+  'Niceo':['m.bourdet@groupe-edgard.com'],
+  'Orlo':['e.orinel@groupe-edgard.com'],
+  'Reimo':['e.despeignes@groupe-edgard.com'],
+  'Strabo':['s.oltz@groupe-edgard.com'],
+  'Turo':['v.gogdet@groupe-edgard.com']
+};
+function getDirMails(societe){return DIR_MAILS[societe]||[];}
+var EMAIL_PRENOMS={
+  't.echalier@groupe-edgard.com':'Thibault',
+  'b.tellechea@groupe-edgard.com':'Baptiste',
+  'v.gogdet@groupe-edgard.com':'Vincent',
+  's.herremans@groupe-edgard.com':'Stéphane',
+  's.langlade@groupe-edgard.com':'Sylvain',
+  'e.varin@groupe-edgard.com':'Emmanuel',
+  'g.bessenet@groupe-edgard.com':'Gaëlle',
+  'a.levrault@groupe-edgard.com':'Anne Véronique',
+  'm.gendre@groupe-edgard.com':'Mégane',
+  'j.descamps@groupe-edgard.com':'Jean',
+  'c.boutolleau@groupe-edgard.com':'Camille',
+  'j.guillot@groupe-edgard.com':'Jacky',
+  'm.bourdet@groupe-edgard.com':'Mathilde',
+  'e.orinel@groupe-edgard.com':'Elise',
+  'e.despeignes@groupe-edgard.com':'Erwan',
+  's.oltz@groupe-edgard.com':'Sophie'
+};
 async function doSendRH(){
   var d=_md||{nom:gv('nom'),prenom:gv('prenom'),societe:gv('societe')};
   var dn=gv('dirNom'),dp=gv('dirPrenom');
