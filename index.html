@@ -823,25 +823,26 @@ function _ouvrirMailDir(data,dirUrl){
   if(data.abs&&data.abs.on)recap+='\n- Absence : '+fD(data.abs.d)+' au '+fD(data.abs.f);
   var hdr=mailHeader(data);
   var subj='[A SIGNER] '+hdr;
-  openEmailModal('Envoyer au directeur',getDirMails(data.societe),function(emails){
-    var prenomDest=EMAIL_PRENOMS[emails[0]];
-    var body='Bonjour'+(prenomDest?' '+prenomDest:'')+',\n\nMerci de signer la demande de '+data.prenom+' '+data.nom+' ('+data.societe+').';
-    if(recap)body+='\n\nRecapitulatif :'+recap;
-    body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
-    body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\n'+body;
-    spin('Envoi en cours...');
-    sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:body})
-      .then(function(){unspin();toast('Demande envoyee au directeur');})
-      .catch(function(){unspin();toast('Erreur d\'envoi, reessayez');});
-    // Suivi n8n — étape collab→directeur
-    logToSheet({id:makeId(data),date_creation:new Date().toISOString(),societe:data.societe,nom:data.nom,prenom:data.prenom,
-      type:(data.cp&&data.cp.on?'CP':'')+(data.abs&&data.abs.on?(data.cp&&data.cp.on?'+':'')+'ABS':''),
-      date_debut:(data.cp&&data.cp.d)||(data.abs&&data.abs.d)||'',
-      date_fin:(data.cp&&data.cp.f)||(data.abs&&data.abs.f)||'',
-      etape:'directeur',statut:'en_attente',
-      en_attente_nom:'Directeur',en_attente_email:emails.join(', '),lien:dirUrl});
+  openDirectorSelect(data.societe,function(chosenEmail){
+    openEmailModal('Envoyer au directeur',[chosenEmail],function(emails){
+      var prenomDest=EMAIL_PRENOMS[emails[0]];
+      var body='Bonjour'+(prenomDest?' '+prenomDest:'')+',\n\nMerci de signer la demande de '+data.prenom+' '+data.nom+' ('+data.societe+').';
+      if(recap)body+='\n\nRecapitulatif :'+recap;
+      body+='\n\nLien pour signer (cliquez pour ouvrir) :\n\n'+dirUrl+'\n\nCordialement,\n'+data.prenom+' '+data.nom;
+      body='══════════════════════════\n'+hdr+'\n══════════════════════════\n\n'+body;
+      spin('Envoi en cours...');
+      sendMailSilent({to:emails[0],cc:emails.slice(1),subject:subj,body:body})
+        .then(function(){unspin();toast('Demande envoyee au directeur');})
+        .catch(function(){unspin();toast('Erreur d\'envoi, reessayez');});
+      // Suivi n8n — étape collab→directeur
+      logToSheet({id:makeId(data),date_creation:new Date().toISOString(),societe:data.societe,nom:data.nom,prenom:data.prenom,
+        type:(data.cp&&data.cp.on?'CP':'')+(data.abs&&data.abs.on?(data.cp&&data.cp.on?'+':'')+'ABS':''),
+        date_debut:(data.cp&&data.cp.d)||(data.abs&&data.abs.d)||'',
+        date_fin:(data.cp&&data.cp.f)||(data.abs&&data.abs.f)||'',
+        etape:'directeur',statut:'en_attente',
+        en_attente_nom:'Directeur',en_attente_email:emails.join(', '),lien:dirUrl});
+    });
   });
-  toast('Mail ouvert — lien inclus',4000);
 }
 function openMailDir(){_ouvrirMailDir(_md||{},'');}
 
@@ -1014,6 +1015,46 @@ var DIR_MAILS={
   'Turo':['v.gogdet@groupe-edgard.com']
 };
 function getDirMails(societe){return DIR_MAILS[societe]||[];}
+var DIRECTOR_LIST=[
+  {societe:'Ango',prenom:'Thibault',nom:'ECHALIER',email:'t.echalier@groupe-edgard.com'},
+  {societe:'Biarro',prenom:'Baptiste',nom:'TELLECHEA',email:'b.tellechea@groupe-edgard.com'},
+  {societe:'Bordo',prenom:'Vincent',nom:'GOGDET',email:'v.gogdet@groupe-edgard.com'},
+  {societe:'Caenpo',prenom:'Stéphane',nom:'HERREMANS',email:'s.herremans@groupe-edgard.com'},
+  {societe:'Giro',prenom:'Sylvain',nom:'LANGLADE',email:'s.langlade@groupe-edgard.com'},
+  {societe:'Havro',prenom:'Emmanuel',nom:'VARIN',email:'e.varin@groupe-edgard.com'},
+  {societe:'Jisam',prenom:'Gaëlle',nom:'BESSENET',email:'g.bessenet@groupe-edgard.com'},
+  {societe:'Lyono',prenom:'Anne Véronique',nom:'LEVRAULT',email:'a.levrault@groupe-edgard.com'},
+  {societe:'Manso',prenom:'Mégane',nom:'GENDRE',email:'m.gendre@groupe-edgard.com'},
+  {societe:'Marseillo',prenom:'Jean',nom:'DESCAMPS',email:'j.descamps@groupe-edgard.com'},
+  {societe:'Nanceo',prenom:'Camille',nom:'BOUTOLLEAU',email:'c.boutolleau@groupe-edgard.com'},
+  {societe:'Nanto',prenom:'Jacky',nom:'GUILLOT',email:'j.guillot@groupe-edgard.com'},
+  {societe:'Niceo',prenom:'Mathilde',nom:'BOURDET',email:'m.bourdet@groupe-edgard.com'},
+  {societe:'Orlo',prenom:'Elise',nom:'ORINEL',email:'e.orinel@groupe-edgard.com'},
+  {societe:'Reimo',prenom:'Erwan',nom:'DESPEIGNES',email:'e.despeignes@groupe-edgard.com'},
+  {societe:'Strabo',prenom:'Sophie',nom:'OLTZ',email:'s.oltz@groupe-edgard.com'},
+  {societe:'Turo',prenom:'Vincent',nom:'GOGDET',email:'v.gogdet@groupe-edgard.com'}
+];
+function openDirectorSelect(societe,cb){
+  var box=document.createElement('div');box.className='modal show';box.id='mdlDirSelect';
+  var matches=DIRECTOR_LIST.filter(function(d){return d.societe===societe;});
+  var opts=matches.map(function(d){
+    return '<option value="'+d.email+'">'+d.prenom+' '+d.nom+' (pour les demandes collaborateurs)</option>';
+  }).join('');
+  opts+='<option value="j.deruy@groupe-edgard.com">Julien DERUY (pour les demandes directeur)</option>';
+  box.innerHTML='<div class="mbox"><div class="mttl">Envoyer la demande à quel destinataire ?</div>'
+    +'<select id="dirSelect" style="width:100%;padding:9px 10px;border:1.5px solid var(--bd);border-radius:6px;font-size:13px;margin-bottom:14px">'+opts+'</select>'
+    +'<div style="display:flex;gap:8px;justify-content:flex-end">'
+    +'<button class="btn bol" style="font-size:12px;padding:8px 16px" id="dirSelectCancel">Annuler</button>'
+    +'<button class="btn bgr" style="font-size:12px;padding:8px 16px" id="dirSelectOk">Continuer</button>'
+    +'</div></div>';
+  document.body.appendChild(box);
+  box.querySelector('#dirSelectCancel').onclick=function(){document.body.removeChild(box);};
+  box.querySelector('#dirSelectOk').onclick=function(){
+    var email=box.querySelector('#dirSelect').value;
+    document.body.removeChild(box);
+    cb(email);
+  };
+}
 var EMAIL_PRENOMS={
   't.echalier@groupe-edgard.com':'Thibault',
   'b.tellechea@groupe-edgard.com':'Baptiste',
