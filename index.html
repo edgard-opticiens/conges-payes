@@ -103,6 +103,7 @@ textarea.inp{border:1.5px solid var(--bd);border-radius:4px;padding:5px 8px;resi
 @keyframes rot{to{transform:rotate(360deg)}}
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dk);color:#fff;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:500;transition:transform .3s;z-index:9999;pointer-events:none;max-width:400px;text-align:center}
 #toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){.r2,.dg,.sigs{grid-template-columns:1fr}}
 @media print{
 *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 body{background:#fff;padding:0;}
